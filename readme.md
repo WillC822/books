@@ -12,8 +12,7 @@
 Add the production Server to your git remotes
 
 ```
-git remote add production
-ssh://root@104.131.61.14
+git remote add live ssh://root@104.131.61.14:/var/repos/books.git
 ```
 Push Master to production
 
