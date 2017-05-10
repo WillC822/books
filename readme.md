@@ -69,6 +69,7 @@ Add content to Hook files
 #!/bin/bash
 
 GIT_WORK_TREE=/var/www/books.com git checkout -f
+/root/.nvm/versions/node/v7.8.0/bin/npm
 npm install --prefix /var/www/books.com/
 ```
 
