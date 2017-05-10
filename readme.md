@@ -3,10 +3,22 @@
 
 # Local Installation
 
+
 ## Prereq's
 * Node v7.8.0+
 * npm  v4.2.0+
 
+```
+npm install
+```
+
+## Start local Server
+```
+npm start
+```
+
+Verify that it is working by viewing port :3000/
+[http://localhost:3000](http://localhost:3000)
 # Deployment
 
 Add the production Server to your git remotes
@@ -14,10 +26,17 @@ Add the production Server to your git remotes
 ```
 git remote add live ssh://root@104.131.61.14:/var/repos/books.git
 ```
-Push Master to production
+
+Push Master to live
 
 ```
-git push production master
+git push live master
+```
+
+# Run the Server
+```
+cd /var/www/books.com
+npm start
 ```
 
 TEST the Server.!!!
