@@ -7,6 +7,22 @@
 * Node v7.8.0+
 * npm  v4.2.0+
 
+# Deployment
+
+Add the production Server to your git remotes
+
+```
+git remote add production
+ssh://root@104.131.61.14
+```
+Push Master to production
+
+```
+git push production master
+```
+
+TEST the Server.!!!
+
 # Server Setup
 
 Create a cloud based server on Digital Ocean. $5
@@ -46,3 +62,5 @@ Make folder for work tree
 ```
 mkdir -p /var/www/books.com
 ```
+
+##
