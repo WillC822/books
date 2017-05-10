@@ -36,6 +36,7 @@ Add content to Hook files
 
 GIT_WORK_TREE=/var/www/books.com git checkout -f
 ```
+
 Make hook executable
 ```
 chmod +x /var/repos/books.git/hooks/post-receive
@@ -43,5 +44,5 @@ chmod +x /var/repos/books.git/hooks/post-receive
 
 Make folder for work tree
 ```
-mkdir -p /var/www/books.coms
+mkdir -p /var/www/books.com
 ```
