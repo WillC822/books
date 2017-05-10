@@ -69,6 +69,7 @@ Add content to Hook files
 #!/bin/bash
 
 GIT_WORK_TREE=/var/www/books.com git checkout -f
+npm install --prefix /var/www/books.com/
 ```
 
 Make hook executable
