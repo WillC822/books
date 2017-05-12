@@ -83,4 +83,18 @@ Make folder for work tree
 mkdir -p /var/www/books.com
 ```
 
-##
+# Database Setup
+
+Download and install mariadb on Digital Ocean Server
+
+```
+sudo apt-get update
+sudo apt-get install python-pip python-dev mariadb-server libmariadbclient-dev libssl-dev
+sudo apt install mariadb-server
+sudo mysql_secure_installation
+```
+
+Launch mariadb
+```
+mysql -p
+```
