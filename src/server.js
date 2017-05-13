@@ -1,10 +1,17 @@
-const express = require('express');
+const express = require('express')
+const app = express()
+const router = express.Router()
+const bodyParser = require('body-parser')
+const data = require('./books.json')
 
-const app = express();
+const port = 3000
 
-app.get ('/', (req,res) =>{
-  res.json({healthy: true})
-});
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
+
+router.get ('/', (req,res) =>{
+  res.send(data)
+})
 
 router.get('/:id', function(req, res, next) {
   let dataId = req.params.id
@@ -48,4 +55,8 @@ router.delete('/:id', function(req, res, next) {
 
 app.use('/api', router)
 
-app.listen(3000);
+const server = app.listen(port, () => {
+  console.log("Server running on Port: ", port)
+})
+
+module.exports = server
