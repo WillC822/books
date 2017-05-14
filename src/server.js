@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const router = express.Router();
 const bodyParser = require('body-parser');
-const data = require('books.json');
+const data = require('models.js');
 
 const port = 3000
 
@@ -17,7 +17,7 @@ router.get('/', function(req, res) {
 })
 
 router.get('/:id', function(req, res, next) {
-  let dataId = req.params.id
+  let dataId = req.params.book_id
 
   res.send(data[dataId])
 })
@@ -27,7 +27,7 @@ router.post('/', function(req, res, next) {
     "title": req.body.title,
     "author": req.body.author,
     "language": req.body.language,
-    "published": req.body.published,
+    "published": req.body.published_date,
     "ISBN": req.body.ISBN
   }
 
@@ -36,21 +36,21 @@ router.post('/', function(req, res, next) {
 })
 
 router.put('/:id', function(req, res, next) {
-  let dataId = req.params.id
+  let dataId = req.params.book_id
   let updatedBook = {
     "title": req.body.title,
     "author": req.body.author,
     "language": req.body.language,
-    "published": req.body.published,
+    "published": req.body.published_date,
     "ISBN": req.body.ISBN
   }
 
   data[dataId] = updatedBook
-  res.send(data[dataId])
+  res.send(data[book_id])
 })
 
 router.delete('/:id', function(req, res, next) {
-  let dataId = req.params.id
+  let dataId = req.params.book_id
 
   data.splice(dataId, 1)
   res.send(data)
