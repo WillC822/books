@@ -1,0 +1,7 @@
+{
+  "host" : "127.0.0.1",
+  "database" : "books",
+  "username" : "root",
+  "password" : "root",
+  "port" : 8889
+}
