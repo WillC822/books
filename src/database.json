@@ -2,6 +2,6 @@
   "host" : "127.0.0.1",
   "database" : "books",
   "username" : "root",
-  "password" : "123",
+  "password" : "dwa_assignment",
   "port" : 3306
 }
