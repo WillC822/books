@@ -56,12 +56,12 @@ const Book = sequelize.define('book', {
         .error(onError)
     },
     retrieveById: (book_id, onSuccess, onError) => {
-      Book.find({where: { id: book_id }})
+      Book.find({where: { book_id: book_id }})
       .then(onSuccess)
       .error(onError)
     },
     removeById: (book_id, onSuccess, onError) => {
-      Book.destroy({ where: { id: book_id }})
+      Book.destroy({ where: { book_id: book_id }})
       .then(onSuccess)
       .error(onError)
     }
