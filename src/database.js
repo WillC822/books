@@ -169,6 +169,32 @@ router.route('/books/:book_id/author')
     })
   })
 
+  router.route('/books/:book_id/language')
+    // select a book, and then find all other copies of that book regardless of language
+    .get((req, res) => {
+      const selectedBook = Book.build()
+
+      selectedBook.retrieveById(req.params.book_id, (books) => {
+        if(books) {
+          let matchingBooks = Book.findAll({
+            where: { ISBN: books.ISBN }
+          }).then((matches) => {
+            if(matches) {
+              res.json(matches)
+            }
+            else {
+              res.send(401, "Couldn't find any matches for that book")
+            }
+          })
+        }
+        else {
+          res.send(401, "Couldn't find any matches for that book")
+        }
+      }, (error) => {
+        res.send("Couldn't find any matches for that book")
+      })
+    })
+
 app.use("/api", router)
 
 const server = app.listen(port, function () {
