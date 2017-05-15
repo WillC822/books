@@ -143,10 +143,29 @@ router.route('/books/:book_id')
     })
   })
 
-  app.use("/api", router)
+router.route('/books/:book_id/author')
+  // select a book, and then find all other books that match that author
+  .get((req, res) => {
+    const selectedBook = Book.build()
 
-  const server = app.listen(port, function () {
-    console.log("Server running on Port: ", port);
+    selectedBook.retrieveById(req.params.book_id, (books) => {
+      if(books) {
+        let matchingAuthors = Book.findAll({ where: { author: books.author }})
+
+        res.json(matchingAuthors)
+      }
+      else {
+        res.send(401, "Couldn't find any books by that author")
+      }
+    }, (error) => {
+      res.send("Couldn't find any books by that author")
+    })
   })
 
-  module.exports = server
+app.use("/api", router)
+
+const server = app.listen(port, function () {
+  console.log("Server running on Port: ", port);
+})
+
+module.exports = server
