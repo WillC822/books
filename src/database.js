@@ -150,9 +150,16 @@ router.route('/books/:book_id/author')
 
     selectedBook.retrieveById(req.params.book_id, (books) => {
       if(books) {
-        let matchingAuthors = Book.findAll({ where: { author: books.author }})
-
-        res.json(matchingAuthors)
+        let matchingAuthors = Book.findAll({
+          where: { author: books.author }
+        }).then((matches) => {
+          if(matches) {
+            res.json(matches)
+          }
+          else {
+            res.send(401, "Couldn't find any books by that author")
+          }
+        })
       }
       else {
         res.send(401, "Couldn't find any books by that author")
