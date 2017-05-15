@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
 
     language: { type: Sequelize.STRING, allowNull: true},
 
-    published_date:type: Sequelize.DATE, defaultValue: Sequelize.NOW, allowNull: true},
+    published_date:type: Sequelize.DATE, allowNull: true},
 
     ISBN:
   })
