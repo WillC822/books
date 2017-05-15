@@ -16,7 +16,10 @@ const sequelize = new Sequelize(
   config.username,
   config.password,
   {
-    port: config.port
+    port: config.port,
+    dialectOptions: {
+      insecureAuth: true
+    }
   }
 )
 
