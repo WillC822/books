@@ -34,6 +34,11 @@ sequelize.authenticate()
 
 //create a Model for a book object (Schema)
 const Book = sequelize.define('book', {
+  book_id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  },
   title: Sequelize.STRING,
   author: Sequelize.STRING,
   language: Sequelize.STRING,
