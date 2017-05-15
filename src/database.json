@@ -3,5 +3,5 @@
   "database" : "books",
   "username" : "root",
   "password" : "123",
-  "port" : 8889
+  "port" : 3306
 }
