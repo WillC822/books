@@ -13,7 +13,7 @@ const config = require('./database.json')
 // create a new connection
 const sequelize = new Sequelize(
   config.database,
-  config.username,
+  "config.username",
   config.password,
   {
     port: config.port,
@@ -67,6 +67,9 @@ const Book = sequelize.define('book', {
     }
   }
 })
+
+// You can use Sequelize's sync method here to make dealing with your table easier
+// sequelize.sync()
 
 router.route('/books')
   // add a book to the collection
@@ -194,6 +197,24 @@ router.route('/books/:book_id/author')
         res.send("Couldn't find any matches for that book")
       })
     })
+
+router.route('/author/:name')
+  // select a book, and then find all other books that match that author
+  .get((req, res) => {
+    const selectedAuthor = req.params.name
+
+    Book.findAll({ where: { author: selectedAuthor }})
+      .then((matches) => {
+        if(matches.length > 1) {
+          res.json(matches)
+        }
+        else {
+          res.send(401, "Couldn't find any books by that author")
+        }
+    }).catch((error) => {
+      res.send(500, "Unable to execute search")
+    })
+  })
 
 app.use("/api", router)
 
