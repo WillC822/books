@@ -13,7 +13,7 @@ const config = require('./database.json')
 // create a new connection
 const sequelize = new Sequelize(
   config.database,
-  "config.username",
+  config.username,
   config.password,
   {
     port: config.port,
