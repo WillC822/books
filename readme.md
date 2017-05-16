@@ -2,7 +2,7 @@
 This is an API designed to manage a collection of books using a MariaDB database, NodeJS, and Express.
 
 ## Prerequisites
-On your local machine you should have the following: 
+On your local machine you should have the following:
 * Node v7.8.0+
 * NPM  v4.2.0+
 
@@ -19,31 +19,37 @@ Clone this repository into your local working directory
 git clone https://github.com/WillC822/books.git
 ```
 
+Change directory into the repository you just cloned
+```
+cd books
+```
+
 Install node_modules and other dependencies outlined in your *package.json*
 ```
 npm install
 ```
 
-## Start local Server
-Start your local server
+You can start your local server with
 ```
 npm start
 ```
 
-Verify your server is running by viewing [http://localhost:3000](http://localhost:3000)
+> **NOTE**: You will not be able to properly connect to your application properly until you adjust your database connection string to match the configuration of your local environment you are using for development and testing. You can do this by editing the database.json file you are provided, but make sure that you save the original configuration to use with the live server.
 
-# Deployment
+Verify your server is running by viewing [http://localhost:3000/api/books](http://localhost:3000/api/books)
 
-Add the Production Server to your list of git remote repositories
+## Branch Model Workflow and Local Development
+Switch to a new branch to begin developing a new feature
 ```
-git remote add REMOTE_SERVER_NAME ssh://root@104.131.61.14:/var/repos/books.git
+git checkout -b FEATURE_NAME
 ```
-## Pushing to the Server
 
-Push to the remote repository by running
+When you're finished developing and testing your feature, merge your feature back into the development branch
 ```
-git push REMOTE_SERVER_NAME BRANCH_NAME
+git checkout development
+git merge FEATURE_NAME
 ```
+
 
 # Running the Application on the Server
 
@@ -52,17 +58,17 @@ Log in to the remote server
 ssh USERNAME@104.131.61.14
 ```
 
-You can view the application status with 
+You can view the application status with
 ```
 pm2 show database
 ```
 
-Restart the application after making changes with 
+Restart the application after making changes with
 ```
 pm2 restart database
 ```
 
-# Setting Up GitHub Repository 
+# Setting Up GitHub Repository
 
 From the remote server, set up a directory where you can receive files from your local machine
 ```
@@ -71,28 +77,37 @@ cd /var/repos/books.git
 git init --bare
 ```
 
-Add a Hook for git
-```shell
+Add a Hook for your GitHub repository to handle actions after you push to it
+```
 nano /var/repos/books.git/hooks/post-receive
 ```
 
-Add content to Hook files
+Add a bash script to your post-receive hook that places the files you pushed in a different directory from your repository.
 ```bash
 #!/bin/bash
 
 GIT_WORK_TREE=/var/www/books.com git checkout -f
-/root/.nvm/versions/node/v7.8.0/bin/npm
-npm install --prefix /var/www/books.com/
 ```
 
-Make hook executable
+Change the permissions of your hook so that it's executable
 ```
 chmod +x /var/repos/books.git/hooks/post-receive
 ```
 
-Make folder for work tree
+Create the directory that your files are going to be pushed to from your local machine
 ```
 mkdir -p /var/www/books.com
 ```
 
-##
+# Deployment
+
+Add the Production Server to your list of git remote repositories
+```
+git remote add REMOTE_SERVER_NAME ssh://root@104.131.61.14:/var/repos/books.git
+```
+
+## Pushing to the Server
+Push to the remote repository by running
+```
+git push REMOTE_SERVER_NAME BRANCH_NAME
+```
