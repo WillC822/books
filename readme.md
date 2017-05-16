@@ -1,59 +1,71 @@
 # Description of Application
+This is an API designed to manage a collection of books using a MariaDB database, NodeJS, and Express.
 
+## Prerequisites
+On your local machine you should have the following: 
+* Node v7.8.0+
+* NPM  v4.2.0+
+
+The remote server needs the following:
+* Ubuntu v16.04.2 x64
+* Nginx [installed and configured](https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-16-04)
+* [MariaDB](https://www.digitalocean.com/community/tutorials/how-to-create-a-table-in-mysql-and-mariadb-on-an-ubuntu-cloud-server#how-to-install-mysql-and-mariadb-on-ubuntu)
+* [NodeJS and NPM](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-16-04#install-nodejs)
+* [PM2](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-16-04#install-nodejs)
 
 # Local Installation
+Clone this repository into your local working directory
+```
+git clone https://github.com/WillC822/books.git
+```
 
-
-## Prereq's
-* Node v7.8.0+
-* npm  v4.2.0+
-
+Install node_modules and other dependencies outlined in your *package.json*
 ```
 npm install
 ```
 
 ## Start local Server
+Start your local server
 ```
 npm start
 ```
 
-Verify that it is working by viewing port :3000/
-[http://localhost:3000](http://localhost:3000)
+Verify your server is running by viewing [http://localhost:3000](http://localhost:3000)
+
 # Deployment
 
-Add the production Server to your git remotes
+Add the Production Server to your list of git remote repositories
+```
+git remote add REMOTE_SERVER_NAME ssh://root@104.131.61.14:/var/repos/books.git
+```
+## Pushing to the Server
 
+Push to the remote repository by running
 ```
-git remote add live ssh://root@104.131.61.14:/var/repos/books.git
-```
-
-Push Master to live
-
-```
-git push live master
-```
-
-# Run the Server
-```
-cd /var/www/books.com
-npm start
+git push REMOTE_SERVER_NAME BRANCH_NAME
 ```
 
-TEST the Server.!!!
+# Running the Application on the Server
 
-# Server Setup
-
-Create a cloud based server on Digital Ocean. $5
-
-Install Node Via NVM
-
-```shell
-curl https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
+Log in to the remote server
+```
+ssh USERNAME@104.131.61.14
 ```
 
-Setup Git Hook to receive files from local
+You can view the application status with 
+```
+pm2 show database
+```
 
-```shell
+Restart the application after making changes with 
+```
+pm2 restart database
+```
+
+# Setting Up GitHub Repository 
+
+From the remote server, set up a directory where you can receive files from your local machine
+```
 mkdir -p /var/repos/books.git
 cd /var/repos/books.git
 git init --bare
