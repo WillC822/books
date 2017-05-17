@@ -14,6 +14,15 @@ const sequelize = new Sequelize(
   }
 )
 
+// make sure sequelize is running properly
+sequelize.authenticate()
+  .then((err) => {
+    console.log('Connection has been established successfully.')
+  })
+  .catch((err) => {
+    console.log('ERROR', err)
+  })
+
 //create a Model for a book object (Schema)
 const Book = sequelize.define('book', {
   book_id: {
@@ -30,24 +39,7 @@ const Book = sequelize.define('book', {
   // don't use timestamps otherwise you'll have trouble with GET calls (created_at, updated_at)
   timestamps: false,
   // set the table name manually so you don't look for a plural table name
-  tableName: 'book',
-  instanceMethods: {
-    retrieveAll: (onSuccess, onError) => {
-      Book.findAll({})
-        .then(onSuccess)
-        .error(onError)
-    },
-    retrieveById: (book_id, onSuccess, onError) => {
-      Book.find({where: { book_id: book_id }})
-      .then(onSuccess)
-      .error(onError)
-    },
-    removeById: (book_id, onSuccess, onError) => {
-      Book.destroy({ where: { book_id: book_id }})
-      .then(onSuccess)
-      .error(onError)
-    }
-  }
+  tableName: 'book'
 })
 
 // You can use Sequelize's sync method here to make dealing with your table easier
