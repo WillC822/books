@@ -34,7 +34,7 @@ You can start your local server with
 npm start
 ```
 
-> **NOTE**: You will not be able to properly connect to your application properly until you adjust your database connection string to match the configuration of your local environment you are using for development and testing. You can do this by editing the database.json file you are provided, but make sure that you save the original configuration to use with the live server.
+> **NOTE**: You will not be able to properly connect to your application properly until you adjust your database connection string to match the configuration of your local environment you are using for development and testing. You can do so by creating a .env file and matching the key/value pairs from the connection string to what suits your local development needs.
 
 Verify your server is running by viewing [http://localhost:3000/api/books](http://localhost:3000/api/books)
 
@@ -49,7 +49,6 @@ When you're finished developing and testing your feature, merge your feature bac
 git checkout development
 git merge FEATURE_NAME
 ```
-
 
 # Running the Application on the Server
 
